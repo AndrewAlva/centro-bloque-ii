@@ -75,7 +75,7 @@ class App {
         // Create audio context and analyser node
         this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
         this.analyser = this.audioContext.createAnalyser();
-        this.analyser.fftSize = 256 * 4; // Size of the FFT for frequency data
+        this.analyser.fftSize = 256 * 1; // Size of the FFT for frequency data
         
         // Create source node from the audio element and connect it to the analyser
         this.source = this.audioContext.createMediaElementSource(this.audio);
@@ -93,25 +93,23 @@ class App {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         // Set bar properties
-        const barWidth = (this.canvas.width / this.bufferLength) * 2.5;
+        const barWidth = (this.canvas.width / this.bufferLength) * 1;
         let barHeight;
         let x = 0;
 
 
-        const frequencySelected = this.bufferLength / 2;
+        // Select "frequency" to be used as threshold or interaction
+        const frequencySelected = this.bufferLength / 4;
         let frequencyIntensity = this.dataArray[frequencySelected];
 
         // Light up the background when reaching certain height
-        let threshold = 60;
+        let threshold = 100;
         if (frequencyIntensity > threshold) {
             this.ctx.fillStyle = `rgb(255, 250, 200)`;
             this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         }
 
-        let xPos = (barWidth + 1) * frequencySelected;
-        this.ctx.fillStyle = `rgb(0, 255, 255)`;
-        this.ctx.fillRect(0, this.canvas.height - threshold, this.canvas.width, 2);
-
+        // Draw bars logic
         for (let i = 0; i < this.bufferLength; i++) {
             barHeight = this.dataArray[i];
 
@@ -122,6 +120,11 @@ class App {
             // Move to the next bar position
             x += barWidth + 1;
         }
+
+        // Draw the threshold mark on top of everything
+        let xPos = (barWidth + 1) * frequencySelected;
+        this.ctx.fillStyle = `rgb(0, 255, 255)`;
+        this.ctx.fillRect(xPos, this.canvas.height - threshold, barWidth, 2);
     }
 
 
