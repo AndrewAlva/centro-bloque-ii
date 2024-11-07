@@ -4,6 +4,7 @@ import Floor from './Floor.js'
 import Fox from './Fox.js'
 import ShaderTest from './ShaderTest.js'
 import InstanceExample from './InstanceExample.js'
+import InstancedCustomGeometryExample from './InstancedCustomGeometryExample.js'
 
 export default class World
 {
@@ -22,6 +23,7 @@ export default class World
             this.environment = new Environment()
             this.shaderTest = new ShaderTest()
             this.instanceExample = new InstanceExample()
+            this.instancedCustomGeometryExample = new InstancedCustomGeometryExample()
         })
     }
 
@@ -35,5 +37,8 @@ export default class World
 
         if(this.instanceExample)
             this.instanceExample.update()
+        
+        if(this.instancedCustomGeometryExample)
+            this.instancedCustomGeometryExample.update()
     }
 }
