@@ -43,6 +43,9 @@ export default class Experience
         this.renderer = new Renderer()
         this.world = new World()
 
+        console.log('draw calls', this.renderer.instance.info.render.calls);
+        console.log('triangle count', this.renderer.instance.info.render.triangles);
+
         // Resize event
         this.sizes.on('resize', () =>
         {
