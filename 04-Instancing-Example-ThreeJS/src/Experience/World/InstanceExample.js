@@ -69,6 +69,8 @@ export default class InstanceExample
                 Math.random() * 0.5 + 0.5
             );
 
+            dummy.speed = Math.random() * 0.04
+
             // Update the matrix for this instance
             dummy.updateMatrix();
             this.instancedMesh.setMatrixAt(i, dummy.matrix);
@@ -88,7 +90,7 @@ export default class InstanceExample
         // update uniforms or something
         for (let i = 0; i < this.instancesTransformations.length; i++) {
             const dummy = this.instancesTransformations[i];
-            dummy.position.z -= 0.025;
+            dummy.position.z -= dummy.speed;
             dummy.rotation.y += 0.015;
             if (dummy.position.z <= -100) dummy.position.z = 100;
             dummy.updateMatrix();
