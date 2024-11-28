@@ -1,5 +1,4 @@
-*
-{
+* {
     margin: 0;
     padding: 0;
 }
@@ -10,8 +9,18 @@ body
     overflow: hidden;
 }
 
+body *
+{
+    position: relative;
+    border: 1px solid blue;
+    display: block;
+    margin: 0;
+    padding: 10px;
+}
+
 .webgl
 {
+    z-index: -1;
     position: fixed;
     top: 0;
     left: 0;
@@ -19,19 +28,9 @@ body
     padding: 0;
 }
 
-
-* {
-    position: relative;
-    border: 1px solid blue;
-    padding: 10px;
-    display: block;
-}
-
 .pageContainer {
     background-color: rgba(255,255,255, 0.5);
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
     width: 100vw;
     height: 100vh;
     backdrop-filter: blur(5px);
