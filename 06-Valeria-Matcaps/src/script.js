@@ -48,7 +48,7 @@ const matcapMaterial = new THREE.MeshMatcapMaterial({
 })
 
 const mesh = new THREE.Mesh(geometry2, matcapMaterial)
-// scene.add(mesh)
+scene.add(mesh)
 
 
 
@@ -117,12 +117,14 @@ window.addEventListener('resize', () =>
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.z = 3
+var posicionZ = 3;
+camera.position.z = posicionZ
+
 scene.add(camera)
 
 // Controls
-const controls = new OrbitControls(camera, canvas)
-controls.enableDamping = true
+// const controls = new OrbitControls(camera, canvas)
+// controls.enableDamping = true
 
 /**
  * Renderer
@@ -143,7 +145,7 @@ const tick = () =>
     const elapsedTime = clock.getElapsedTime()
 
     // Update controls
-    controls.update()
+    // controls.update()
 
     // Render
     renderer.render(scene, camera)
@@ -153,3 +155,21 @@ const tick = () =>
 }
 
 tick()
+
+
+function moverCamaraZ(data) {
+    console.log(data.deltaY);
+    let offset = 0;
+    if (data.deltaY > 0) {
+        offset += 1;
+        // offset = offset + 1;
+    } else if (data.deltaY < 0) {
+        offset -= 1;
+        // offset = offset - 1;
+    }
+
+    posicionZ += offset;
+    camera.position.z = posicionZ;
+}
+
+window.addEventListener('wheel', moverCamaraZ);
