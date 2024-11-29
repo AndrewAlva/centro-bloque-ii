@@ -7,15 +7,17 @@ html,
 body
 {
     overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
 }
 
 body *
 {
     position: relative;
-    border: 1px solid blue;
     display: block;
     margin: 0;
-    padding: 10px;
+    padding: 2px;
+    /* border: 1px solid blue; */
 }
 
 .webgl
@@ -29,11 +31,11 @@ body *
 }
 
 .pageContainer {
-    background-color: rgba(255,255,255, 0.5);
+    /* background-color: rgba(255,255,255, 0.5); */
+    /* backdrop-filter: blur(5px); */
     position: relative;
     width: 100vw;
     height: 100vh;
-    backdrop-filter: blur(5px);
     padding-top: 100px;
 }
 
@@ -44,19 +46,55 @@ header {
     height: 50px;
     display: flex;
     background-color: #fff;
+    color: #000;
 }
 
-.selectDoggies ul {
+.selectDoggies {
+    position: relative;
+    width: 100%;
+    display: flex;
+}
+
+.dogsThumbnails {
+    width: 30%;
+    min-width: 300px;
     display: flex;
     flex-direction: column;
 }
 
 .dogSelector {
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 70px;
     margin-bottom: 10px;
+    transition: all 0.7s cubic-bezier(0.215, 0.610, 0.355, 1);
 }
 
+.dogSelector:hover {
+    transform: translate3d(20px, 0, 0);
+}
+
+    .dogSelector button {
+        appearance: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+    .dogSelector img {
+        width: 100%;
+    }
+
+    .dogSelector h2 {
+        position: absolute;
+        bottom: 0;
+        color: #fff;
+        text-shadow: 2px 2px #000;
+    }
+    
+.selectedDoggieSpace {
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+}
 /* .dogSelector:hover {
     transform: translate3d(20px, 0, 0);
 } */
