@@ -27,12 +27,51 @@ gltfLoader.setDRACOLoader(dracoLoader)
 
 let mixer = null
 
+let foxes = [];
+let Mokke, Fredy, Toby;
+
 gltfLoader.load(
     '/models/Fox/glTF/Fox.gltf',
     (gltf) =>
     {
         gltf.scene.scale.set(0.025, 0.025, 0.025)
         scene.add(gltf.scene)
+        foxes.push(gltf.scene)
+        Mokke = gltf.scene;
+
+        // Animation
+        mixer = new THREE.AnimationMixer(gltf.scene)
+        const action = mixer.clipAction(gltf.animations[2])
+        action.play()
+    }
+)
+
+gltfLoader.load(
+    '/models/Fox/glTF/Fox.gltf',
+    (gltf) =>
+    {
+        gltf.scene.scale.set(0.025, 0.025, 0.025)
+        gltf.scene.position.set(2, 0, 0)
+        scene.add(gltf.scene)
+        foxes.push(gltf.scene)
+        Fredy = gltf.scene;
+
+        // Animation
+        mixer = new THREE.AnimationMixer(gltf.scene)
+        const action = mixer.clipAction(gltf.animations[2])
+        action.play()
+    }
+)
+
+gltfLoader.load(
+    '/models/Fox/glTF/Fox.gltf',
+    (gltf) =>
+    {
+        gltf.scene.scale.set(0.025, 0.025, 0.025)
+        gltf.scene.position.set(-2, 0, 0)
+        scene.add(gltf.scene)
+        foxes.push(gltf.scene)
+        Toby = gltf.scene;
 
         // Animation
         mixer = new THREE.AnimationMixer(gltf.scene)
@@ -106,9 +145,9 @@ camera.lookAt(-2, 0, 0)
 scene.add(camera)
 
 // Controls
-// const controls = new OrbitControls(camera, canvas)
-// controls.target.set(0, 0.75, 0)
-// controls.enableDamping = true
+const controls = new OrbitControls(camera, canvas)
+controls.target.set(0, 0.75, 0)
+controls.enableDamping = true
 
 /**
  * Renderer
@@ -140,7 +179,7 @@ const tick = () =>
     }
 
     // Update controls
-    // controls.update()
+    controls.update()
 
     // Render
     renderer.render(scene, camera)
@@ -150,3 +189,29 @@ const tick = () =>
 }
 
 tick()
+
+
+// logica para elegir al click
+var botonMokke = document.getElementById('botonMokke');
+var botonFredy = document.getElementById('botonFredy');
+
+function elegirAMokke() {
+    console.log('quiero a Mokke');
+    Mokke.visible = true;
+
+    Fredy.visible = false;
+    Toby.visible = false;
+
+}
+
+function elegirAFredy() {
+    console.log('quiero a Freddy');
+    Fredy.visible = true;
+
+    Mokke.visible = false;
+    Toby.visible = false;
+
+}
+
+botonMokke.addEventListener('click', elegirAMokke)
+botonFredy.addEventListener('click', elegirAFredy)
