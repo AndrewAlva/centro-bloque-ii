@@ -22,7 +22,7 @@ body *
 
 .webgl
 {
-    z-index: -1;
+    pointer-events: all;
     position: fixed;
     top: 0;
     left: 0;
@@ -33,6 +33,7 @@ body *
 .pageContainer {
     /* background-color: rgba(255,255,255, 0.5); */
     /* backdrop-filter: blur(5px); */
+    pointer-events: none;
     position: relative;
     width: 100vw;
     height: 100vh;
@@ -63,6 +64,7 @@ header {
 }
 
 .dogSelector {
+    pointer-events: all;
     width: 100px;
     height: 70px;
     margin-bottom: 10px;
